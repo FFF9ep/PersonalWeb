@@ -26,10 +26,10 @@ export default function Footer() {
           {/* Social */}
           <div className="flex items-center gap-3">
             {[
-              { icon: FiGithub, href: 'https://github.com/fandiardyan', label: 'GitHub' },
+              { icon: FiGithub, href: 'https://github.com/fff9ep', label: 'GitHub' },
               { icon: FiLinkedin, href: 'https://linkedin.com/in/fandiardyan', label: 'LinkedIn' },
-              { icon: FiMail, href: 'mailto:hello@fandiardyan.dev', label: 'Email' },
-              { icon: FaWhatsapp, href: 'https://wa.me/6281234567890', label: 'WhatsApp' },
+              { icon: FiMail, href: 'mailto:fandardyy@gmail.com', label: 'Email' },
+              { icon: FaWhatsapp, href: 'https://wa.me/082146667577', label: 'WhatsApp' },
             ].map((s) => (
               <a
                 key={s.label}

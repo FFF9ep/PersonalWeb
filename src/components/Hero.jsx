@@ -112,7 +112,7 @@ export default function Hero() {
             className="flex items-center gap-4"
           >
             {[
-              { icon: FiGithub, href: 'https://github.com/fandiardyan', label: 'GitHub' },
+              { icon: FiGithub, href: 'https://github.com/fff9ep', label: 'GitHub' },
               { icon: FiLinkedin, href: 'https://linkedin.com/in/fandiardyan', label: 'LinkedIn' },
             ].map((social) => (
               <a

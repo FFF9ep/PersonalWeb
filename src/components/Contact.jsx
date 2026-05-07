@@ -18,14 +18,14 @@ const contactInfo = [
   {
     icon: HiOutlineMail,
     label: 'Email',
-    value: 'hello@fandiardyan.dev',
-    href: 'mailto:hello@fandiardyan.dev',
+    value: 'fandardyy@gmail.com',
+    href: 'mailto:fandardyy@gmail.com',
   },
   {
     icon: FaWhatsapp,
     label: 'WhatsApp',
-    value: '+62 812 3456 7890',
-    href: `https://wa.me/${WHATSAPP_NUMBER}`,
+    value: '+6282146667577',
+    href: `https://wa.me/082146667577`,
   },
   {
     icon: FiMapPin,

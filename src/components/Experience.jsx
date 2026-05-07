@@ -5,41 +5,29 @@ import { HiBriefcase, HiStar } from 'react-icons/hi'
 
 const experiences = [
   {
-    period: '2024 — Present',
-    role: 'Freelance Fullstack Developer',
-    company: 'Self-employed',
+    period: 'Apr 2025 — Agu 2025',
+    role: 'Future Talks Coordinator',
+    company: 'Mindworks Lab · Kontrak',
+    location: 'Area DKI Jakarta · Jarak jauh',
+    duration: '5 bln',
     description:
-      'Working with diverse clients to build custom web applications, from e-commerce platforms to SaaS dashboards. Handling the entire development lifecycle independently — from requirements gathering to deployment and maintenance.',
+      'Future Talks is a program by MindWorks collaborating with Kok Bisa and ThinkPolicy designed to empower people from diverse backgrounds to better understand the challenges of the future, build critical thinking skills, and inspire action toward solving real-world problems in an ever-changing world.',
     achievements: [
-      'Delivered 10+ client projects on time and within budget',
-      'Built scalable applications serving thousands of users',
-      'Maintained 5-star client satisfaction ratings',
+      'Team Leadership',
+      'Teamwork',
     ],
     type: 'freelance',
   },
   {
-    period: '2023 — 2024',
-    role: 'Frontend Developer',
-    company: 'Tech Startup',
+    period: 'Jan 2024 — Jul 2024',
+    role: 'Asistant Lab Informatics',
+    company: 'University Of Muhammadiyah Malang · Magang',
+    location: 'Malang, Jawa Timur, Indonesia · Di lokasi',
+    duration: '7 bln',
     description:
-      'Collaborated with a small team to build and ship product features for a B2B SaaS platform. Focused on creating responsive, accessible UI components and improving application performance.',
+      'As an Informatics Laboratory Assistant, the primary responsibilities include supporting the setup, maintenance, and operation of laboratory equipment and assisting students and faculty in various lab activities.',
     achievements: [
-      'Reduced page load time by 40% through code optimization',
-      'Implemented design system used across 15+ pages',
-      'Mentored junior developers on React best practices',
-    ],
-    type: 'employment',
-  },
-  {
-    period: '2022 — 2023',
-    role: 'Web Development Intern',
-    company: 'Digital Agency',
-    description:
-      'Gained foundational experience in web development working on client projects. Learned agile methodologies, version control workflows, and professional coding standards.',
-    achievements: [
-      'Contributed to 5 client-facing projects',
-      'Built reusable component library for the team',
-      'Received full-time offer upon internship completion',
+      'Team Leadership',
     ],
     type: 'internship',
   },
