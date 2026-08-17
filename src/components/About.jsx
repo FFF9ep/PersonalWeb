@@ -2,6 +2,7 @@ import { SectionWrapper, SectionHeading, Card } from './ui'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { HiCode, HiLightningBolt } from 'react-icons/hi'
+import { AskAIButton } from './AskAI'
 
 const stats = [
   { value: '10+', label: 'Projects Delivered' },
@@ -68,6 +69,8 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+
+          <AskAIButton className="mt-6" />
         </div>
 
         {/* Highlight cards — using Card primitive */}

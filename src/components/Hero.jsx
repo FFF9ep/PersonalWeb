@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { HiArrowDown, HiOutlineMail } from 'react-icons/hi'
 import { FiGithub, FiLinkedin } from 'react-icons/fi'
+import { AskAIButton } from './AskAI'
 
 export default function Hero() {
   return (
@@ -102,6 +103,7 @@ export default function Hero() {
               <HiOutlineMail />
               Contact Me
             </a>
+            <AskAIButton />
           </motion.div>
 
           {/* Social links */}
