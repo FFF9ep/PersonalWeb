@@ -37,3 +37,5 @@ coverage/
 
 # Vite
 *.local
+.vercel
+.env*

@@ -8,9 +8,14 @@
  * - Jika traffic tinggi, pertimbangkan upgrade ke plan berbayar atau tambah rate limiting per IP.
  */
 
-const GEMINI_ENDPOINT =
-  'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent'
+import dotenv from 'dotenv'
+import path from 'path'
 
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') })
+
+const GEMINI_ENDPOINT =
+  'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent'
+  
 const MAX_MESSAGE_LENGTH = 500
 const MAX_HISTORY_PAIRS = 10
 
@@ -77,6 +82,10 @@ function convertHistory(history) {
 }
 
 export default async function handler(req, res) {
+  console.log('CWD:', process.cwd())
+  console.log('NODE_ENV:', process.env.NODE_ENV)
+  console.log('Total env count:', Object.keys(process.env).length)
+  console.log('ENV KEYS:', Object.keys(process.env).filter(k => k.includes('GEMINI')))
   // ── CORS headers ─────────────────────────────────────────────────
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -134,11 +143,14 @@ export default async function handler(req, res) {
   // ── Call Gemini API ──────────────────────────────────────────────
   let geminiRes
   try {
-    geminiRes = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
+    geminiRes = await fetch(GEMINI_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(geminiBody),
-    })
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
+  },
+    body: JSON.stringify(geminiBody),
+  })
   } catch (networkErr) {
     console.error('[chat] Network error calling Gemini:', networkErr)
     return res.status(502).json({ error: 'Could not reach the AI service. Please try again.' })
@@ -147,7 +159,8 @@ export default async function handler(req, res) {
   // ── Handle Gemini HTTP errors ────────────────────────────────────
   if (!geminiRes.ok) {
     const status = geminiRes.status
-    console.error(`[chat] Gemini returned HTTP ${status}`)
+    const errorBody = await geminiRes.text()
+    console.error(`[chat] Gemini returned HTTP ${status}:`, errorBody)
 
     if (status === 429) {
       return res.status(429).json({ error: 'Too many requests. Please wait a moment and try again.' })
