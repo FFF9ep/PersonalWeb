@@ -135,10 +135,13 @@ export default async function handler(req, res) {
     },
     contents,
     generationConfig: {
-      maxOutputTokens: 512,
-      temperature: 0.7,
+    maxOutputTokens: 1024,        // naikkan dari 512, beri ruang lebih
+    temperature: 0.7,
+    thinkingConfig: {
+      thinkingLevel: 'LOW',        // kurangi porsi "thinking" karena use case ini simple Q&A
     },
-  }
+  },
+}
 
   // ── Call Gemini API ──────────────────────────────────────────────
   let geminiRes
