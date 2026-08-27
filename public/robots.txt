@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fandi-ardyan.vercel.app/sitemap.xml
