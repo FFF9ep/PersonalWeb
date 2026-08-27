@@ -25,13 +25,24 @@
     <meta name="twitter:description" content="Fullstack Developer building scalable web apps with React, Node.js, and modern tooling." />
     <meta name="twitter:image" content="https://fandiardyan.dev/og-image.png" />
 
-    <!-- Theme color -->
-    <meta name="theme-color" content="#0F172A" />
+    <!-- Theme color (updated by theme script below) -->
+    <meta name="theme-color" content="#FFFFFF" />
 
-    <!-- Font: only 3 weights (400, 500, 700) instead of 6 -->
+    <!-- Font: Inter 400/500/600/800 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
+
+    <!-- Theme detection (runs before render to prevent flash) -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#111111' : '#FFFFFF');
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

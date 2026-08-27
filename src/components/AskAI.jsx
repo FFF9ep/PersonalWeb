@@ -16,7 +16,7 @@ const GREETING = {
 
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-1.5 px-4 py-3 rounded-2xl rounded-bl-sm bg-secondary/50 border border-border/30 w-fit">
+    <div className="flex items-center gap-1.5 px-4 py-3 rounded-xl rounded-bl-sm bg-secondary border border-border w-fit">
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
@@ -43,8 +43,8 @@ function MessageBubble({ message }) {
       <p
         className={`max-w-[82%] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
           isUser
-            ? 'bg-accent/10 border border-accent/20 text-text-primary rounded-2xl rounded-br-sm'
-            : 'bg-secondary/50 border border-border/30 text-text-secondary rounded-2xl rounded-bl-sm'
+            ? 'bg-accent text-primary rounded-xl rounded-br-sm'
+            : 'bg-secondary border border-border text-text-secondary rounded-xl rounded-bl-sm'
         }`}
       >
         {message.content}
@@ -63,7 +63,7 @@ function ErrorBubble({ message }) {
       transition={{ duration: 0.2, ease: 'easeOut' }}
       className="flex justify-start"
     >
-      <p className="max-w-[82%] px-4 py-3 rounded-2xl rounded-bl-sm text-sm bg-red-500/10 border border-red-500/20 text-red-400 leading-relaxed">
+      <p className="max-w-[82%] px-4 py-3 rounded-xl rounded-bl-sm text-sm bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 leading-relaxed">
         {message}
       </p>
     </motion.div>
@@ -148,7 +148,7 @@ function AskAIModal({ onClose }) {
   }
 
   return (
-    /* ── Overlay — sama seperti overlay di komponen lain ─────────── */
+    /* ── Overlay ─────────────────────────────────────────────────── */
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -159,20 +159,20 @@ function AskAIModal({ onClose }) {
         if (e.target === e.currentTarget) onClose()
       }}
     >
-      {/* ── Panel — animasi sama seperti mobile menu di Navbar ────── */}
+      {/* ── Panel ────────────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 16 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="w-full sm:max-w-lg flex flex-col bg-primary border border-border/50 shadow-2xl shadow-black/40
-                   h-[88svh] sm:h-[600px] rounded-t-2xl sm:rounded-2xl overflow-hidden"
+        className="w-full sm:max-w-lg flex flex-col bg-primary border border-border shadow-lg
+                   h-[88svh] sm:h-[600px] rounded-t-xl sm:rounded-xl overflow-hidden"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-border/30 shrink-0">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span className="text-accent font-bold text-sm">FA</span>
+            <div className="w-8 h-8 rounded-lg bg-secondary border border-border flex items-center justify-center">
+              <span className="text-text-primary font-bold text-sm">FA</span>
             </div>
             <div>
               <p className="text-sm font-semibold text-text-primary leading-tight">Ask about Fandi</p>
@@ -183,7 +183,7 @@ function AskAIModal({ onClose }) {
             onClick={onClose}
             aria-label="Close chat"
             className="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted
-                       hover:text-accent hover:bg-accent/10 transition-colors duration-200"
+                       hover:text-text-primary hover:bg-secondary transition-colors duration-150"
           >
             <HiX size={18} />
           </button>
@@ -200,7 +200,7 @@ function AskAIModal({ onClose }) {
         </div>
 
         {/* Input area */}
-        <div className="px-4 py-4 border-t border-border/30 shrink-0">
+        <div className="px-4 py-4 border-t border-border shrink-0">
           <div className="flex items-center gap-2">
             <input
               ref={inputRef}
@@ -212,17 +212,17 @@ function AskAIModal({ onClose }) {
               maxLength={500}
               disabled={isLoading}
               aria-label="Your message"
-              className="flex-1 px-4 py-2.5 rounded-xl bg-secondary/50 border border-border/40 text-text-primary text-sm
-                         placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20
-                         transition-all duration-300 disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 rounded-lg bg-secondary border border-border text-text-primary text-sm
+                         placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20
+                         transition-colors duration-150 disabled:opacity-50"
             />
             <motion.button
               onClick={sendMessage}
               disabled={!input.trim() || isLoading}
               whileTap={{ scale: 0.95 }}
               aria-label="Send message"
-              className="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0
-                         hover:bg-accent-hover transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-10 h-10 rounded-lg bg-accent text-primary flex items-center justify-center shrink-0
+                         hover:bg-accent-hover transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <FiSend size={15} />
             </motion.button>
@@ -247,9 +247,9 @@ export function AskAIButton({ className = '' }) {
   return (
     <button
       onClick={handleClick}
-      className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-border
-                 text-text-secondary font-medium text-sm hover:border-accent/40 hover:text-accent
-                 hover:scale-105 active:scale-97 transition-all duration-200 cursor-pointer ${className}`}
+      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border
+                 text-text-secondary font-semibold text-sm hover:bg-secondary hover:border-text-muted/30 hover:text-accent
+                 transition-colors duration-150 cursor-pointer ${className}`}
     >
       <HiChatAlt2 size={16} />
       Ask AI About Me

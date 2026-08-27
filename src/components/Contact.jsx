@@ -50,56 +50,54 @@ export default function Contact() {
   return (
     <SectionWrapper id="contact">
       <SectionHeading
+        number="05"
         title="Get In Touch"
         subtitle="Have a project in mind? Let's make it happen."
       />
 
-      <div className="grid md:grid-cols-5 gap-10 md:gap-16">
-        {/* Contact info */}
-        <div className="md:col-span-2 space-y-6">
-          <p className="text-text-secondary leading-relaxed text-sm md:text-base">
-            Open to new projects, creative ideas, and collaboration.
-            I typically respond within 24 hours.
-          </p>
+      <div className="max-w-3xl">
+        {/* Intro text */}
+        <p className="text-text-secondary leading-relaxed text-sm md:text-base mb-8">
+          Open to new projects, creative ideas, and collaboration.
+          I typically respond within 24 hours.
+        </p>
 
-          <div className="space-y-4">
-            {contactInfo.map((info) => (
-              <div key={info.label} className="flex items-center gap-4 group">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                  <info.icon className="text-accent" size={18} />
-                </div>
-                <div>
-                  <p className="text-xs text-text-muted uppercase tracking-wider">{info.label}</p>
-                  {info.href ? (
-                    <a
-                      href={info.href}
-                      target={info.href.startsWith('http') ? '_blank' : undefined}
-                      rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="text-sm text-text-primary hover:text-accent transition-colors"
-                    >
-                      {info.value}
-                    </a>
-                  ) : (
-                    <p className="text-sm text-text-primary">{info.value}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium hover:bg-emerald-500/20 hover:scale-105 transition-all duration-300"
-          >
-            <FaWhatsapp size={18} />
-            Chat on WhatsApp
-          </a>
+        {/* Contact info — horizontal inline row */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8">
+          {contactInfo.map((info) => (
+            <div key={info.label} className="flex items-center gap-2 text-sm">
+              <info.icon className="text-text-muted shrink-0" size={15} />
+              {info.href ? (
+                <a
+                  href={info.href}
+                  target={info.href.startsWith('http') ? '_blank' : undefined}
+                  rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-text-primary hover:text-accent transition-colors"
+                >
+                  {info.value}
+                </a>
+              ) : (
+                <span className="text-text-primary">{info.value}</span>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Contact form */}
-        <div className="md:col-span-3">
+        {/* WhatsApp CTA — prominent standalone button */}
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-primary text-sm font-semibold hover:bg-accent-hover transition-colors duration-150 mb-12"
+        >
+          <FaWhatsapp size={18} />
+          Chat on WhatsApp
+        </a>
+
+        {/* Separator + form section */}
+        <div className="border-t border-border pt-10">
+          <p className="text-sm text-text-muted mb-6">Or send a message</p>
+
           <form onSubmit={handleSubmit} className="space-y-5">
             <Input
               label="Name"
@@ -127,7 +125,7 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-accent text-primary font-semibold text-sm btn-glow hover:bg-accent-hover hover:scale-105 transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-primary font-semibold text-sm hover:bg-accent-hover transition-colors duration-150 cursor-pointer"
               >
                 <FiSend size={14} />
                 Send via WhatsApp

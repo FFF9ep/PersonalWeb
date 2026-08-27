@@ -1,7 +1,6 @@
 import { SectionWrapper, SectionHeading } from './ui'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { HiBriefcase, HiStar } from 'react-icons/hi'
 
 const experiences = [
   {
@@ -33,7 +32,7 @@ const experiences = [
   },
 ]
 
-function ExperienceCard({ exp, index }) {
+function ExperienceEntry({ exp, index, isLast }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -43,46 +42,30 @@ function ExperienceCard({ exp, index }) {
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4, delay: index * 0.15 }}
-      className="relative pl-8 pb-12 last:pb-0"
+      className={`py-8 md:py-10 ${!isLast ? 'border-b border-border' : ''}`}
     >
-      {/* Timeline line */}
-      <div className="absolute left-[11px] top-3 bottom-0 w-px bg-border/50 last:hidden" />
-
-      {/* Timeline dot */}
-      <div className="absolute left-0 top-2 w-[23px] h-[23px] rounded-full bg-primary border-2 border-accent/50 flex items-center justify-center">
-        <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+      {/* Top row: role + period */}
+      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+        <h3 className="font-bold text-text-primary text-lg md:text-xl">
+          {exp.role}
+        </h3>
+        <span className="text-sm text-text-muted whitespace-nowrap">
+          {exp.period}
+        </span>
       </div>
 
-      {/* Card */}
-      <div className="p-5 md:p-6 rounded-2xl bg-secondary/30 border border-border/30 shadow-lg hover:border-accent/20 hover:shadow-xl transition-all duration-300 group">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
-          <div>
-            <h3 className="font-semibold text-text-primary group-hover:text-accent transition-colors text-base md:text-lg">
-              {exp.role}
-            </h3>
-            <div className="flex items-center gap-2 text-sm">
-              <HiBriefcase className="text-accent/60" size={14} />
-              <span className="text-text-secondary">{exp.company}</span>
-            </div>
-          </div>
-          <span className="text-xs text-text-muted bg-primary/50 px-3 py-1.5 rounded-lg border border-border/30 whitespace-nowrap self-start">
-            {exp.period}
-          </span>
-        </div>
+      {/* Company */}
+      <p className="text-sm text-text-secondary mb-4">{exp.company}</p>
 
-        <p className="text-text-muted text-sm leading-relaxed mb-4">
-          {exp.description}
-        </p>
+      {/* Description */}
+      <p className="text-text-muted text-sm leading-relaxed mb-4 max-w-3xl">
+        {exp.description}
+      </p>
 
-        <ul className="space-y-2">
-          {exp.achievements.map((a, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
-              <HiStar className="text-accent/70 mt-0.5 shrink-0" size={14} />
-              {a}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* Achievements — inline text separated by · */}
+      <p className="text-sm text-text-secondary">
+        {exp.achievements.join(' · ')}
+      </p>
     </motion.div>
   )
 }
@@ -91,13 +74,19 @@ export default function Experience() {
   return (
     <SectionWrapper id="experience">
       <SectionHeading
+        number="04"
         title="Experience"
         subtitle="My professional journey and key accomplishments."
       />
 
       <div className="max-w-3xl">
         {experiences.map((exp, i) => (
-          <ExperienceCard key={exp.period} exp={exp} index={i} />
+          <ExperienceEntry
+            key={exp.period}
+            exp={exp}
+            index={i}
+            isLast={i === experiences.length - 1}
+          />
         ))}
       </div>
     </SectionWrapper>

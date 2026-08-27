@@ -1,4 +1,4 @@
-import { SectionWrapper, SectionHeading, Card } from './ui'
+import { SectionWrapper, SectionHeading } from './ui'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { HiCode, HiLightningBolt } from 'react-icons/hi'
@@ -36,61 +36,65 @@ export default function About() {
   return (
     <SectionWrapper id="about">
       <SectionHeading
+        number="01"
         title="About Me"
         subtitle="Building practical solutions with real-world impact."
       />
 
-      <div className="grid md:grid-cols-5 gap-10 md:gap-16 items-start">
-        {/* Bio */}
-        <div className="md:col-span-3 space-y-5">
-          <p className="text-text-secondary leading-relaxed text-base md:text-lg">
-            I'm a fullstack developer who turns ideas into production-ready web
-            applications. With hands-on freelance experience, I've shipped projects
-            end-to-end — from scoping requirements to deploying scalable code.
-          </p>
-          <p className="text-text-secondary leading-relaxed text-base md:text-lg">
-            I focus on clean architecture, performance, and user experience. Whether
-            it's a React frontend, a Node.js API, or a full-stack SaaS — I deliver
-            solutions that work in the real world.
-          </p>
+      {/* Single-column prose — no grid */}
+      <div className="max-w-3xl space-y-5">
+        <p className="text-text-secondary leading-relaxed text-base md:text-lg">
+          I'm a fullstack developer who turns ideas into production-ready web
+          applications. With hands-on freelance experience, I've shipped projects
+          end-to-end — from scoping requirements to deploying scalable code.
+        </p>
+        <p className="text-text-secondary leading-relaxed text-base md:text-lg">
+          I focus on clean architecture, performance, and user experience. Whether
+          it's a React frontend, a Node.js API, or a full-stack SaaS — I deliver
+          solutions that work in the real world.
+        </p>
+      </div>
 
-          {/* Stats */}
-          <div ref={statsRef} className="flex gap-6 pt-4">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 15 }}
-                animate={statsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <p className="text-2xl md:text-3xl font-bold text-accent">{stat.value}</p>
-                <p className="text-xs text-text-muted uppercase tracking-wider mt-1">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* Stats bar — horizontal, border-top + border-bottom */}
+      <div
+        ref={statsRef}
+        className="grid grid-cols-3 border-y border-border my-12 md:my-16 max-w-3xl"
+      >
+        {stats.map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 15 }}
+            animate={statsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="py-6 md:py-8 text-center"
+          >
+            <p className="text-2xl md:text-3xl font-extrabold text-text-primary">{stat.value}</p>
+            <p className="text-xs text-text-muted uppercase tracking-wider mt-1">{stat.label}</p>
+          </motion.div>
+        ))}
+      </div>
 
-          <AskAIButton className="mt-6" />
-        </div>
-
-        {/* Highlight cards — using Card primitive */}
-        <div className="md:col-span-2 space-y-4">
-          {highlights.map((item) => (
-            <Card key={item.title} className="p-5">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
-                  {item.icon ? (
-                    <item.icon className="text-accent" size={18} />
-                  ) : (
-                    <span className="text-accent text-sm">{item.emoji}</span>
-                  )}
-                </div>
-                <h3 className="font-semibold text-text-primary text-sm">{item.title}</h3>
-              </div>
+      {/* Highlights — simple list with inline icons, not cards */}
+      <div className="max-w-3xl space-y-6">
+        {highlights.map((item) => (
+          <div key={item.title} className="flex items-start gap-3">
+            <span className="text-text-muted mt-0.5 shrink-0">
+              {item.icon ? (
+                <item.icon size={16} />
+              ) : (
+                <span className="text-sm">{item.emoji}</span>
+              )}
+            </span>
+            <div>
+              <h3 className="font-semibold text-text-primary text-sm mb-0.5">{item.title}</h3>
               <p className="text-text-muted text-sm leading-relaxed">{item.text}</p>
-            </Card>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8">
+        <AskAIButton />
       </div>
     </SectionWrapper>
   )
