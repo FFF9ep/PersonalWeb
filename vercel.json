@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://fandi-ardyan.tech/:path*",
+      "statusCode": 301
+    }
+  ]
+}
